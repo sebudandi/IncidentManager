@@ -230,8 +230,8 @@ return [
              */
             //'port' => 'non_standard_port_number',
             'username' => 'root',
-            'password' => 'robert',
-            'database' => 'profdb',
+            'password' => 'root',
+            'database' => 'incident_manager_v1',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],

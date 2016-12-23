@@ -5,89 +5,51 @@
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-yellow">
                 <div class="widget-user-image">
-                    <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+                    <img class="img-circle" src="" alt="User Avatar">
                 </div><!-- /.widget-user-image -->
-                <h3 class="widget-user-username"><?php echo $person['fname']; ?></h3>
-                <h5 class="widget-user-desc"><?php echo $person['id']; ?></h5>
+                <h3 class="widget-user-username"><?php echo $incident['person']['fname'].' '.$incident['person']['lname']; ?></h3>
+                <h5 class="widget-user-desc"><?php echo $incident['person']['id']; ?></h5>
             </div>
             <div class="box-footer no-padding">
-               
+                <ul class="nav nav-stacked">
+                    <li><a href="#">Nationality:<span class="pull-right"><?php echo $incident['person']['nationality']; ?></span></a></li>
+                    <li><a href="#">Date Of Birth:<span class="pull-right"><?php echo $incident['person']['dob']; ?></span></a></li>
+                    <li><a href="#">Marital Status:<span class="pull-right"><?php echo $incident['person']['maritialStatus']; ?></span></a></li>
+                    <li><a href="#">Passport Number:<span class="pull-right"><?php echo $incident['person']['passportNo']; ?></span></a></li>
+                </ul>
             </div>
         </div><!-- /.widget-user -->
     </div><!-- /.col -->
-    <!-- Small boxes (Stat box) -->
-    <div class="col-lg-3 col-xs-4">
-        <!-- small box -->
-        <div class="small-box bg-aqua">
-            <div class="inner">
-                <h3>150</h3>
-                <p>New Orders</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-shopping-cart"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
-    <div class="col-lg-3 col-xs-4">
-        <!-- small box -->
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                <h3>44</h3>
-                <p>User Registrations</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
-</div><!-- /.row -->
-<div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Incident</h3>
-                <div class="box-tools">
-                    <div class="input-group" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+    <div class="col-md-8">
+        <!-- Horizontal Form -->
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">Incident Details</h3>
+            </div><!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Incident Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" value="<?php echo $incident['incident_name']; ?>" readonly="readonly">
                         </div>
                     </div>
-                </div>
-            </div><!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
-                    <tr>
-                         <th scope="col"><?= $this->Paginator->sort('incident_report') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('incident_name') ?></th>
-             
-                <th scope="col"><?= $this->Paginator->sort('incident_details') ?></th>
-                       
-                        <th>Action</th>
-                    </tr>
-                        <?php foreach($incident as $key=>$value): ?>
-                    <tr>
-                <td><?php echo $value['incident_report']; ?></td>
-                <td><?php echo $value['incident_name']; ?></td>
-                <td><?php echo $value['incident_details']; ?></td>
-                        <td>
-                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', 
-    array('controller' => 'incident', 'action' => 'edit', $value['id']), 
-    array('escape' => false)); ?> 
-                                <?php echo $this->Html->link('<i class="fa fa-fw fa-sticky-note-o"></i>', 
-    array('controller' => 'incident', 'action' => 'view', $value['id']), 
-    array('escape' => false)); ?>
-                        </td>
-                    </tr>
-                        <?php endforeach; ?>
-                </table>
-            </div><!-- /.box-body -->
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">Incident Details:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3" disabled=""><?php echo $incident['incident_details']; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Incident Station:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword3" value="<?php echo $incident['stations_idstations']; ?>" readonly="readonly">
+                        </div>
+                    </div>
+            </form>
         </div><!-- /.box -->
+    </div><!-- /.row -->
+    <div class="row">
+
     </div>
-</div>

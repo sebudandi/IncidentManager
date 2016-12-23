@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -8,28 +9,23 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\PersonTable $Person
  */
-class PersonController extends AppController
-{
+class PersonController extends AppController {
 
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         //$this->paginate(array('limit'=>25));
-       // $person = $this->Person->find('all');
+        // $person = $this->Person->find('all');
+        // $this->set(compact('person', $person));
 
-       // $this->set(compact('person', $person));
-        
-        $this->paginate =[
-            'contain'   => ['Incident']   //with artists We also fetch pictures
+        $this->paginate = [
+            'contain' => ['Incident']   //with artists We also fetch pictures
         ];
         $this->set('person', $this->paginate($this->Person));
         $this->set('_serialize', ['person']);
-        
-        
     }
 
     /**
@@ -39,17 +35,16 @@ class PersonController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $person = $this->Person->get($id, [
             'contain' => ['Incident']
         ]);
 
         $this->set('person', $person);
         $this->set('_serialize', ['person']);
-       
-        $incident = $this->Person->Incident-> find('all', array('conditions' =>
-					array('person_details_id' => $id)));
+
+        $incident = $this->Person->Incident->find('all', array('conditions' =>
+            array('person_details_id' => $id)));
         $this->set(compact('incident', $this->paginate($incident)));
     }
 
@@ -58,15 +53,16 @@ class PersonController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
+        $nations = $this->Person->Nations->find('all');
+        $this->set('nations', $nations);
         $person = $this->Person->newEntity();
         if ($this->request->is('post')) {
             $person = $this->Person->patchEntity($person, $this->request->data);
             $result = $this->Person->save($person);
             if ($result) {
-               $id = $result->id;
-                
+                $id = $result->id;
+
                 $this->Flash->success(__('The person has been saved.'));
 
                 return $this->redirect(['action' => 'view', $id]);
@@ -85,8 +81,7 @@ class PersonController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $person = $this->Person->get($id, [
             'contain' => []
         ]);
@@ -111,8 +106,7 @@ class PersonController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $person = $this->Person->get($id);
         if ($this->Person->delete($person)) {
@@ -123,8 +117,8 @@ class PersonController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
-     public function isAuthorized($user) {
+
+    public function isAuthorized($user) {
         $base = 'person/';
         if ($this->request->action == 'index') {
             $method = $base;
@@ -136,4 +130,5 @@ class PersonController extends AppController
         }
         return parent::isAuthorized($user);
     }
+
 }

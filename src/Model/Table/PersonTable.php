@@ -37,6 +37,7 @@ class PersonTable extends Table
          $this->hasMany('Incident', [
             'foreignKey' => 'person_details_id'
         ]);
+         $this->hasMany('Nations');
         
         
     }

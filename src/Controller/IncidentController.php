@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -8,16 +9,14 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\ReportTable $Report
  */
-class IncidentController extends AppController
-{
+class IncidentController extends AppController {
 
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         $incident = $this->paginate($this->Incident);
 
         $this->set(compact('incident'));
@@ -31,19 +30,12 @@ class IncidentController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $incident = $this->Incident->get($id, [
-            'contain' => []
+            'contain' => ['Person']
         ]);
 
         $this->set('incident', $incident);
-         
-        $this->set('_serialize', ['incident']);
-         
-       
-       
-        
     }
 
     /**
@@ -51,12 +43,17 @@ class IncidentController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add($id = null)
-    {
+    public function add($id = null) {
+        $person = $this->Incident->Person->get($id);
+        $this->set('person', $person);
+        $bstations = $this->Incident->Station->find('all');
+        $this->set('bstations', $bstations);
+        $events = $this->Incident->Events->find('all');
+        $this->set('events', $events);
         $incident = $this->Incident->newEntity();
         if ($this->request->is('post')) {
             $this->request->data['person_details_id'] = $id;
-           
+            $this->request->data['incident_date'] = date('Y-m-d');
             $incident = $this->Incident->patchEntity($incident, $this->request->data);
             if ($this->Incident->save($incident)) {
                 $this->Flash->success(__('The incident has been saved.'));
@@ -67,7 +64,6 @@ class IncidentController extends AppController
             }
         }
         $this->set(compact('incident'));
-        $this->set('_serialize', ['incident']);
     }
 
     /**
@@ -77,8 +73,7 @@ class IncidentController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $incident = $this->Incident->get($id, [
             'contain' => []
         ]);
@@ -103,8 +98,7 @@ class IncidentController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $incident = $this->Incident->get($id);
         if ($this->Incidnet->delete($incident)) {
@@ -115,7 +109,8 @@ class IncidentController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-     public function isAuthorized($user) {
+
+    public function isAuthorized($user) {
         $base = 'incident/';
         if ($this->request->action == 'index') {
             $method = $base;
@@ -127,4 +122,5 @@ class IncidentController extends AppController
         }
         return parent::isAuthorized($user);
     }
+
 }

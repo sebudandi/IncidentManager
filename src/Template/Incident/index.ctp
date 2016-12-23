@@ -47,9 +47,9 @@
                 
            
                  <td class="actions">
-                    <?php echo $this->Html->link(__('View'), ['action' => 'view', $value['id']]) ?>
-                    <?php echo  $this->Html->link(__('Edit'), ['action' => 'edit', $value['id']]) ?>
-                    <?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $value['id']]) ?>
+                    <?php echo $this->Html->link(__('View'), ['action' => 'view', $value['idincident_report']]) ?>
+                    <?php echo  $this->Html->link(__('Edit'), ['action' => 'edit', $value['idincident_report']]) ?>
+                    <?php echo $this->Form->postLink(__('Delete'), ['action' => 'delete', $value['idincident_report']]) ?>
                 </td>
      
 
