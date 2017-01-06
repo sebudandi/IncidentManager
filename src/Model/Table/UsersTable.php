@@ -12,6 +12,7 @@ class UsersTable extends Table {
     public function initialize(array $config) {
         $this->table('sm_user_accounts');
         $this->addBehavior('Timestamp');
+        $this->hasMany('UserLevels');
     }
 
     public function validationDefault(Validator $validator) {

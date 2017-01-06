@@ -18,15 +18,32 @@ class UsersController extends AppController {
         $this->set(compact('user'));
     }
 
-    public function add() {
+    public function create($id = false) {
+        $roles = $this->UserLevels->find('all');
+        $this->set(compact('roles', $roles));
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'add']);
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add the user.'));
+        }
+        $this->set('user', $user);
+    }
+    
+    public function edit($id = false) {
+        $roles = $this->UserLevels->find('all');
+        $this->set(compact('roles', $roles));
+        $user = $this->Users->get($id);
+        if ($this->request->is(['post', 'put'])) {
+            $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('User Information Updated successfully.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update User Information.'));
         }
         $this->set('user', $user);
     }
@@ -52,7 +69,7 @@ class UsersController extends AppController {
         // Allow users to register and logout.
         // You should not add the "login" action to allow list. Doing so would
         // cause problems with normal functioning of AuthComponent.
-        $this->Auth->allow(['add', 'logout']);
+        //$this->Auth->allow(['add', 'logout']);
     }
 
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Template/Incident/add.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Template/Layout/default.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Controller/IncidentController.php</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Template/Incident/view.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Template/Person/add.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Controller/PersonController.php</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Template/Person/view.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Template/Incident/view_old.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Template/Incident/index.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/config/app.php</file>
+            <file>file:/Applications/MAMP/htdocs/MVendIO/IncidentManager/src/Model/Table/IncidentTable.php</file>
+        </group>
+    </open-files>
+</project-private>

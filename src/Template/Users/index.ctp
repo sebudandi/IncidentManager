@@ -1,49 +1,47 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Login Attempts'), ['controller' => 'LoginAttempts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Login Attempt'), ['controller' => 'LoginAttempts', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('iduser') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('create_time') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('level') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $this->Number->format($user->iduser) ?></td>
-                <td><?= h($user->username) ?></td>
-                <td><?= h($user->email) ?></td>
-                <td><?= h($user->password) ?></td>
-                <td><?= h($user->create_time) ?></td>
-                <td><?= $this->Number->format($user->level) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->iduser]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->iduser]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->iduser], ['confirm' => __('Are you sure you want to delete # {0}?', $user->iduser)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Users</h3>
+                    <div class="box-tools">
+                        <div class="input-group" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Full Name</th>
+                            <th>User Name</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php foreach($users as $key=>$value): ?>
+                        <tr>
+                            <td><?php echo $value['full_name']; ?></td>
+                            <td><?php echo $value['username']; ?></td>
+                            <td><?php echo $value['role']; ?></td>
+                            <td><?php echo $value['status']; ?></td>
+                            <td>
+                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', 
+    array('controller' => 'users', 'action' => 'edit', $value['user_id']), 
+    array('escape' => false)); ?> 
+                                <?php echo $this->Html->link('<i class="fa fa-fw fa-sticky-note-o"></i>', 
+    array('controller' => 'users', 'action' => 'view', $value['user_id']), 
+    array('escape' => false)); ?>
+                            </td>
+                        </tr> 
+                        <?php endforeach; ?>
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
     </div>
-</div>
+</section><!-- /.content -->
